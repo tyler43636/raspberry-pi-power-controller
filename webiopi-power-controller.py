@@ -20,16 +20,6 @@ BUTTON = 17
 POWER = 18
 
 
-# Returns True or False depending on current power state
-# True - The power is currently on
-# False - The power is currently off
-def checkPowerState(pin):
-    """Checks whether the device is in the on of off state."""
-    if GPIO.digitalRead(pin, 0):
-        return False
-    else:
-        return True
-
 # A macro without args which return nothing
 @webiopi.macro
 def PrintTime():
@@ -37,8 +27,9 @@ def PrintTime():
 
 
 @webiopi.macro
-def letThereBeLight():
-    GPIO.digitalWrite(POWER, True)
+def printPower(pin=POWER):
+    status = GPIO.digitalRead(pin)
+    webiopi.debug(PROJECT_NAME + " - VAR = " + str(status))
 
 
 @webiopi.macro
@@ -49,6 +40,30 @@ def togglePower(pin=POWER):
     else:
         GPIO.digitalWrite(pin, True)
         webiopi.debug(PROJECT_NAME + " - Power On")
+
+
+# turn the power off
+@webiopi.macro
+def powerOff(pin=POWER):
+    GPIO.digitalWrite(pin, False)
+    webiopi.debug(PROJECT_NAME + " - Power Off")
+
+
+# turn the power on
+@webiopi.macro
+def powerOn(pin=POWER):
+    GPIO.digitalWrite(pin, True)
+    webiopi.debug(PROJECT_NAME + " - Power On")
+
+
+# Returns True or False depending on current power state
+# True - The power is currently on
+# False - The power is currently off
+def checkPowerState(pin=POWER):
+    """Checks whether the device is in the on of off state."""
+    status = GPIO.digitalRead(pin)
+    webiopi.debug(PROJECT_NAME + " - Power is on?: " + str(status))
+    return status
 
 
 # Called by WebIOPi at script loading
@@ -63,10 +78,12 @@ def setup():
 
 # Looped by WebIOPi
 def loop():
-    # Toggle power state with button.
-    time.sleep(0.1)
-    if GPIO.digitalRead(BUTTON):
-        togglePower(POWER)
+    webiopi.sleep(0.05)
+    button_push = not GPIO.digitalRead(BUTTON)
+    if button_push:
+        togglePower()
+        webiopi.sleep(0.5)
+    webiopi.debug(PROJECT_NAME + " - " + str(button_push))
 
 
 # Called by WebIOPi at server shutdown

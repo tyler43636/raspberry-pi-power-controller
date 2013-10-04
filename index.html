@@ -3,27 +3,52 @@
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content = "height = device-height, width = 420, user-scalable = no" />
-        <title>WebIOPi | Demo</title>
+        <title>Power Control</title>
         <script type="text/javascript" src="/webiopi.js"></script>
         <script type="text/javascript">
         webiopi().ready(function() {
                 var content, button;
                 content = $("#content");
 
-                // create a button which call myMacroWithoutArgs
-                button = webiopi().createMacroButton("macro", "Cycle Power", "letThereBeLight");
+                // create a button to call cylcePower
+                button = webiopi().createMacroButton("macro", "Print Power", "printPower");
+                content.append(button); //append button to content div
+                // create a button to call cylcePower
+                button = webiopi().createMacroButton("macro", "Toggle Power", "togglePower");
+                content.append(button); //append button to content div
+                // create a button which call powerOff
+                button = webiopi().createMacroButton("macro", "Power Off", "powerOff");
+                content.append(button); // append button to content div
+
+                // create a button which call powerOn
+                button = webiopi().createMacroButton("macro", "Power On", "powerOn");
                 content.append(button); // append button to content div
 
         });
 
         function callMacro() {
-                // call myMacroWithArgs(arg)
-                webiopi().callMacro("letThereBeLight", macroCallback);
+            // call myMacroWithArgs(arg)
+            webiopi().callMacro("printPower");
         }
 
-        function macroCallback(macro, args, data) {
-                alert(macro + " returned with " + data);
+        function callMacro() {
+            // call myMacroWithArgs(arg)
+            webiopi().callMacro("powerOff");
         }
+
+        function callMacro() {
+            // call myMacroWithArgs(arg)
+            webiopi().callMacro("powerOn");
+        }
+
+        //function callMacro() {
+        //    // call myMacroWithArgs(arg)
+        //    webiopi().callMacro("letThereBeLight", macroCallback);
+        //}
+
+        //function macroCallback(macro, args, data) {
+        //        alert(macro + " returned with " + data);
+        //}
 
         </script>
         <style type="text/css">
