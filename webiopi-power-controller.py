@@ -1,13 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # Tyler Payne
-# Inital webiopi configureation. Runs at webiopi service startup.
+# Initial webiopi configuration. Runs at webiopi service startup.
 
-# Imports
 import time
 import webiopi
 
 # Project Name
-PROJECT_NAME = 'AC Controller'
+PROJECT_NAME = 'Power Controller'
 
 # Alias GPIO library for convenience
 GPIO = webiopi.GPIO
@@ -20,20 +19,17 @@ BUTTON = 17
 POWER = 18
 
 
-# A macro without args which return nothing
 @webiopi.macro
-def PrintTime():
-    webiopi.debug("PrintTime: " + time.asctime())
-
-
-@webiopi.macro
-def printPower(pin=POWER):
+def powerStatus(pin=POWER):
+    """ returns 'True' if the power is on 'False' is it is off."""
     status = GPIO.digitalRead(pin)
     webiopi.debug(PROJECT_NAME + " - VAR = " + str(status))
+    return status
 
 
 @webiopi.macro
 def togglePower(pin=POWER):
+    """ toggle the power state"""
     if checkPowerState(pin):
         GPIO.digitalWrite(pin, False)
         webiopi.debug(PROJECT_NAME + " - Power Off")
@@ -42,32 +38,33 @@ def togglePower(pin=POWER):
         webiopi.debug(PROJECT_NAME + " - Power On")
 
 
-# turn the power off
 @webiopi.macro
 def powerOff(pin=POWER):
+    """ Turns the power off """
     GPIO.digitalWrite(pin, False)
     webiopi.debug(PROJECT_NAME + " - Power Off")
 
 
-# turn the power on
 @webiopi.macro
 def powerOn(pin=POWER):
+    """ Turns the power on"""
     GPIO.digitalWrite(pin, True)
     webiopi.debug(PROJECT_NAME + " - Power On")
 
 
-# Returns True or False depending on current power state
-# True - The power is currently on
-# False - The power is currently off
 def checkPowerState(pin=POWER):
-    """Checks whether the device is in the on of off state."""
+    """
+        Checks whether the device is in the on of off state.
+        True - The power is currently on
+        False - The power is currently off
+    """
     status = GPIO.digitalRead(pin)
-    webiopi.debug(PROJECT_NAME + " - Power is on?: " + str(status))
+    webiopi.debug(PROJECT_NAME + " - Power Status | On=" + str(status))
     return status
 
 
-# Called by WebIOPi at script loading
 def setup():
+    """ Called when webiopi starts"""
     webiopi.debug(PROJECT_NAME + " - Setup")
 
     #Setup GPIO
@@ -76,18 +73,17 @@ def setup():
     GPIO.digitalWrite(POWER, True)
 
 
-# Looped by WebIOPi
 def loop():
+    """ Loop run by WebIOPi """
     webiopi.sleep(0.05)
     button_push = not GPIO.digitalRead(BUTTON)
     if button_push:
         togglePower()
         webiopi.sleep(0.5)
-    webiopi.debug(PROJECT_NAME + " - " + str(button_push))
 
 
-# Called by WebIOPi at server shutdown
 def destroy():
+    """ Called by WebIOPi at server exit """
     webiopi.debug("AC Controller - Destroy")
     GPIO.setFunction(POWER, GPIO.IN)
     GPIO.setFunction(BUTTON, GPIO.IN)

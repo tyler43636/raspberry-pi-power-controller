@@ -10,12 +10,10 @@
                 var content, button;
                 content = $("#content");
 
-                // create a button to call cylcePower
-                button = webiopi().createMacroButton("macro", "Print Power", "printPower");
-                content.append(button); //append button to content div
-                // create a button to call cylcePower
+                // create a button to call togglePower
                 button = webiopi().createMacroButton("macro", "Toggle Power", "togglePower");
                 content.append(button); //append button to content div
+
                 // create a button which call powerOff
                 button = webiopi().createMacroButton("macro", "Power Off", "powerOff");
                 content.append(button); // append button to content div
@@ -24,11 +22,15 @@
                 button = webiopi().createMacroButton("macro", "Power On", "powerOn");
                 content.append(button); // append button to content div
 
+                // create a button which call powerOn
+                button = webiopi().createMacroButton("macro", "Power Status", "powerStatus");
+                content.append(button); // append button to content div
+
         });
 
         function callMacro() {
             // call myMacroWithArgs(arg)
-            webiopi().callMacro("printPower");
+            webiopi().callMacro("togglePower");
         }
 
         function callMacro() {
@@ -41,14 +43,14 @@
             webiopi().callMacro("powerOn");
         }
 
-        //function callMacro() {
-        //    // call myMacroWithArgs(arg)
-        //    webiopi().callMacro("letThereBeLight", macroCallback);
-        //}
+        function callMacro() {
+            // call myMacroWithArgs(arg)
+            webiopi().callMacro("powerStatus");
+        }
 
-        //function macroCallback(macro, args, data) {
-        //        alert(macro + " returned with " + data);
-        //}
+        function macroCallback(macro, args, data) {
+                alert(macro + " returned with " + data);
+        }
 
         </script>
         <style type="text/css">
