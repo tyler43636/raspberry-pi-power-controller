@@ -6,8 +6,6 @@
         <title>Power Control</title>
         <script type="text/javascript" src="/webiopi.js"></script>
         <script type="text/javascript">
-        var POWER = 18 //read this pin to get power status
-
         webiopi().ready(function() {
                 var content, button;
                 content = $("#content");
@@ -17,23 +15,18 @@
                 content.append(button); //append button to content div
 
                 // create a button which call powerOff
-                button = webiopi().createMacroButton("macro", "Off", "powerOff");
+                button = webiopi().createMacroButton("macro", "Power Off", "powerOff");
                 content.append(button); // append button to content div
 
                 // create a button which call powerOn
-                button = webiopi().createMacroButton("macro", "On", "powerOn");
+                button = webiopi().createMacroButton("macro", "Power On", "powerOn");
                 content.append(button); // append button to content div
 
-                // create a button which call myMacroWithArgs with "1,2,3" as argument
-                button = webiopi().createMacroButton("macro", "Status", "powerStatus", POWER);
+                // create a button which call powerOn
+                button = webiopi().createMacroButton("macro", "Status", "powerStatus");
                 content.append(button); // append button to content div
 
         });
-        function getStatus(){
-            // call to get power status of pin
-            var status = WebIOPi.digitalRead(18);
-            WebIOPi.setLabel("status", String(status))
-        }
 
         function callMacro() {
             // call myMacroWithArgs(arg)
@@ -52,13 +45,12 @@
 
         function callMacro() {
             // call myMacroWithArgs(arg)
-            webiopi().callMacro("powerStatus", POWER, macroCallback);
+            webiopi().callMacro("powerStatus",  macroCallback);
         }
 
         function macroCallback(macro, args, data) {
                 alert(macro + " returned with " + data);
         }
-
 
         </script>
         <style type="text/css">
@@ -78,11 +70,11 @@
                         height: 45px;
                 }
 
-                #gpio18.LOW {
+                #gpio17.LOW {
                         background-color: White;
                 }
 
-                #gpio18.HIGH {
+                #gpio17.HIGH {
                         background-color: Red;
                 }
         </style>

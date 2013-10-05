@@ -2,7 +2,6 @@
 # Tyler Payne
 # Initial webiopi configuration. Runs at webiopi service startup.
 
-import time
 import webiopi
 
 # Project Name
