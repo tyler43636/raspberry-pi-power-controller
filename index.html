@@ -45,7 +45,7 @@
 
         function callMacro() {
             // call myMacroWithArgs(arg)
-            webiopi().callMacro("powerStatus");
+            webiopi().callMacro("powerStatus", macroCallback());
         }
 
         function macroCallback(macro, args, data) {
