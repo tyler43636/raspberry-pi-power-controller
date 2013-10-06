@@ -11,19 +11,19 @@
                 content = $("#content");
 
                 // create a button to call togglePower
-                button = webiopi().createMacroButton("macro", "Toggle Power", "togglePower");
+                button = webiopi().createMacroButton("macro", "Toggle", "togglePower");
                 content.append(button); //append button to content div
 
                 // create a button which call powerOff
-                button = webiopi().createMacroButton("macro", "Power Off", "powerOff");
+                button = webiopi().createMacroButton("macro", "Off", "powerOff");
                 content.append(button); // append button to content div
 
                 // create a button which call powerOn
-                button = webiopi().createMacroButton("macro", "Power On", "powerOn");
+                button = webiopi().createMacroButton("macro", "On", "powerOn");
                 content.append(button); // append button to content div
 
                 // create a button which call powerOn
-                button = webiopi().createMacroButton("macro", "Power Status", "powerStatus");
+                button = webiopi().createMacroButton("macro", "Status", "powerStatus");
                 content.append(button); // append button to content div
 
         });
