@@ -64,7 +64,7 @@ def checkPowerState(pin=POWER):
 
 
 def setup():
-    """ Called when webiopi starts"""
+    """ Called when webiopi starts """
     webiopi.debug(PROJECT_NAME + " - Setup")
 
     #Setup GPIO
