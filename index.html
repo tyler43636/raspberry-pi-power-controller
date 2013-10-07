@@ -36,7 +36,7 @@
         function getStatus(){
             // call to get power status of pin
             var status = WebIOPi.digitalRead(18);
-            WebIOPi.setLabel(status, String(status))
+            WebIOPi.setLabel("status", String(status))
         }
 
         function callMacro() {
