@@ -6,6 +6,8 @@
         <title>Power Control</title>
         <script type="text/javascript" src="/webiopi.js"></script>
         <script type="text/javascript">
+        POWER = 18 //read this pin to get power status
+
         webiopi().ready(function() {
                 var content, button;
                 content = $("#content");
@@ -26,7 +28,15 @@
                 button = webiopi().createMacroButton("macro", "Status", "powerStatus");
                 content.append(button); // append button to content div
 
+                // Create new button to call status
+        		button = webiopi().createButton("status", "Status 2", getStatus(POWER));
+	        	content.append(button); // append button to content div
+
         });
+        function getStatus(pin){
+            // call to get power status of pin
+            WebIOPi.digitalRead(pin, statusCallback);
+        }
 
         function callMacro() {
             // call myMacroWithArgs(arg)
@@ -50,6 +60,10 @@
 
         function macroCallback(macro, args, data) {
                 alert(macro + " returned with " + data);
+        }
+
+        function statusCallBack(funct,  data) {
+                alert(funct + " returned with " + data);
         }
 
         </script>
