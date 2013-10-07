@@ -29,8 +29,8 @@
                 content.append(button); // append button to content div
 
                 // Create new button to call status
-        		button = webiopi().createButton("status", "Status 2", getStatus);
-	        	content.append(button); // append button to content div
+                button = webiopi().createGPIOButton(POWER, "Status");
+                content.append(button); // append button to content div
 
         });
         function getStatus(){
