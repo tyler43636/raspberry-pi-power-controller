@@ -28,13 +28,11 @@
                 button = webiopi().createMacroButton("macro", "Status", "powerStatus");
                 content.append(button); // append button to content div
 
-                if (WebIOPi.digitalRead(18) == 0) {
-                    var status = "Off";
-
+                if (w().GPIO[18].value == 1){
+                    button = webiopi().createButton("status", "On");
                 } else {
-                    var status = "On";
+                    button = webiopi().createButton("status", "Off");
                 }
-                button = webiopi().createGPIOButton(status);
                 content.append(button)
 
         });
