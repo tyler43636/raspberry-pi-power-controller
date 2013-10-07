@@ -29,13 +29,13 @@
                 content.append(button); // append button to content div
 
                 // Create new button to call status
-        		button = webiopi().createButton("status", "Status 2", getStatus(POWER));
+        		button = webiopi().createButton("status", "Status 2", getStatus);
 	        	content.append(button); // append button to content div
 
         });
-        function getStatus(pin){
+        function getStatus(){
             // call to get power status of pin
-            WebIOPi.digitalRead(pin, statusCallback);
+            WebIOPi.digitalRead(POWER, statusCallback);
         }
 
         function callMacro() {
