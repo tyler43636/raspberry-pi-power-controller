@@ -24,17 +24,6 @@
                 button = webiopi().createMacroButton("macro", "On", "powerOn");
                 content.append(button); // append button to content div
 
-                // create a button which call powerOn
-                button = webiopi().createMacroButton("macro", "Status", "powerStatus");
-                content.append(button); // append button to content div
-
-                if (w().GPIO[18].value == 1){
-                    button = webiopi().createButton("status", "On");
-                } else {
-                    button = webiopi().createButton("status", "Off");
-                }
-                content.append(button)
-
         });
         function getStatus(){
             // call to get power status of pin
@@ -59,16 +48,13 @@
 
         function callMacro() {
             // call myMacroWithArgs(arg)
-            webiopi().callMacro("powerStatus", macroCallback);
+            webiopi().callMacro("powerStatus", POWER, macroCallback);
         }
 
         function macroCallback(macro, args, data) {
                 alert(macro + " returned with " + data);
         }
 
-        function statusCallBack(funct,  data) {
-                alert(funct + " returned with " + data);
-        }
 
         </script>
         <style type="text/css">
