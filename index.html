@@ -22,10 +22,6 @@
                 button = webiopi().createMacroButton("macro", "Power On", "powerOn");
                 content.append(button); // append button to content div
 
-                // create a button which call powerOn
-                button = webiopi().createMacroButton("macro", "Status", "powerStatus");
-                content.append(button); // append button to content div
-
         });
 
         function callMacro() {
@@ -41,15 +37,6 @@
         function callMacro() {
             // call myMacroWithArgs(arg)
             webiopi().callMacro("powerOn");
-        }
-
-        function callMacro() {
-            // call myMacroWithArgs(arg)
-            webiopi().callMacro("powerStatus",  macroCallback);
-        }
-
-        function macroCallback(macro, args, data) {
-                alert(macro + " returned with " + data);
         }
 
         </script>
