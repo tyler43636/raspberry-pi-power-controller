@@ -24,6 +24,10 @@
                 button = webiopi().createMacroButton("macro", "On", "powerOn");
                 content.append(button); // append button to content div
 
+                // create a button which call myMacroWithArgs with "1,2,3" as argument
+                button = webiopi().createMacroButton("macro", "Status", "powerStatus", POWER);
+                content.append(button); // append button to content div
+
         });
         function getStatus(){
             // call to get power status of pin
