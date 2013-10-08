@@ -14,8 +14,8 @@ GPIO = webiopi.GPIO
 webiopi.setDebug()
 
 # Set output and input pins
-BUTTON = 17
-POWER = 18
+BUTTON = 22
+POWER = 24
 
 
 @webiopi.macro
